@@ -189,6 +189,9 @@ public class ConfigurationAdapter {
             if (configuration.hasKey(TOOLBAR_TITLE)) {
                 configureToolbarTitle(configuration.getString(TOOLBAR_TITLE));
             }
+            if (configuration.hasKey(SHOW_DOCUMENT_EDITOR)) {
+              configureDocumentEditorShown(configuration.getBoolean(SHOW_DOCUMENT_EDITOR));
+            }
         }
     }
 
@@ -437,6 +440,14 @@ public class ConfigurationAdapter {
 
     private void configureToolbarTitle(@Nullable final String customTitle) {
         configuration.title(customTitle);
+    }
+
+    private void configureDocumentEditorShown(final boolean documentEditorShown) {
+        if (documentEditorShown) {
+            configuration.enableDocumentEditor();
+        } else {
+            configuration.disableDocumentEditor();
+        }
     }
 
     public PdfActivityConfiguration build() {
