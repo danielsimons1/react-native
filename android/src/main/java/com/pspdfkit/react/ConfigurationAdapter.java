@@ -86,6 +86,7 @@ public class ConfigurationAdapter {
     private static final String EDITABLE_ANNOTATION_TYPES = "editableAnnotationTypes";
     private static final String SHOW_SETTINGS_MENU = "showSettingsMenu";
     private static final String TOOLBAR_TITLE = "toolbarTitle";
+    private static final String SHOW_DOCUMENT_EDITOR = "showDocumentEditor";
 
     private final PdfActivityConfiguration.Builder configuration;
 
