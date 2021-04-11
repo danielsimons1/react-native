@@ -1052,6 +1052,7 @@ class HidingToolbar extends Component {
 }
 
 class CustomFontPicker extends Component {
+  
   render() {
     return (
       <View style={{ flex: 1 }}>

@@ -86,6 +86,12 @@ public class ReactPdfUiFragment extends PdfUiFragment {
         getChildFragmentManager().unregisterFragmentLifecycleCallbacks(fragmentLifecycleCallbacks);
     }
 
+    @Override
+    public void onDocumentLoaded(@NonNull PdfDocument document) {
+      super.onDocumentLoaded(document);
+      getPSPDFKitViews().showView(PSPDFKitViews.Type.VIEW_THUMBNAIL_GRID);
+    }
+
     /**
      * Listener that notifies of actions taken directly in the PdfUiFragment.
      */
