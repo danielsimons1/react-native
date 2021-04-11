@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import com.pspdfkit.react.R;
 import com.pspdfkit.ui.PdfFragment;
 import com.pspdfkit.ui.PdfUiFragment;
+import com.pspdfkit.ui.PSPDFKitViews;
 import com.pspdfkit.document.PdfDocument;
 
 /**
