@@ -25,6 +25,7 @@ import com.pspdfkit.react.R;
 import com.pspdfkit.ui.PdfFragment;
 import com.pspdfkit.ui.PdfUiFragment;
 import com.pspdfkit.document.PdfDocument;
+import com.pspdfkit.ui.PSPDFKitViews;
 
 /**
  * This {@link PdfUiFragment} provides additional callbacks to improve integration into react native.
