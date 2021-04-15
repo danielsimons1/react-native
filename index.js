@@ -735,8 +735,6 @@ if (Platform.OS === "ios" || Platform.OS === "android") {
     PSPDFKitImageView
   );
 
-  module.exports = {
-    PSPDFKitImageView: PSPDFKitImageView,
-    PSPDFKitView: PSPDFKitView
-  }
+  module.exports.PSPDFKitView = PSPDFKitView;
+  module.exports.PSPDFKitImageView = PSPDFKitImageView;
 }
