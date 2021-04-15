@@ -19,6 +19,11 @@ public class ReactImageManager extends SimpleViewManager<ReactImageView> {
     return new ReactImageView(context, Fresco.newDraweeControllerBuilder(), null, mCallerContext);
   }
 
+  @ReactProp(name = "src")
+  public void setSrc(ReactImageView view, @Nullable ReadableArray sources) {
+    view.setSource(sources);
+  }
+
   @Override
   public String getName() {
     return REACT_CLASS;

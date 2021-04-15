@@ -16,6 +16,17 @@ import {
   UIManager,
 } from "react-native";
 
+// ImageView.js
+
+/**
+ * Composes `View`.
+ *
+ * - src: string
+ * - borderRadius: number
+ * - resizeMode: 'cover' | 'contain' | 'stretch'
+ */
+module.exports = requireNativeComponent('RCTImageView');
+
 class PSPDFKitView extends React.Component {
   _nextRequestId = 1;
   _requestMap = new Map();
