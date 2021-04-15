@@ -25,7 +25,22 @@ import {
  * - borderRadius: number
  * - resizeMode: 'cover' | 'contain' | 'stretch'
  */
-module.exports = requireNativeComponent('RCTImageView');
+
+class PSPDFKitImageView extends React.Component {
+
+    render() {
+        if (Platform.OS === "ios" || Platform.OS === "android") {
+
+            return (
+                <RCTImageView
+                    {...this.props}
+                />
+            );
+        } else {
+            return null;
+        }
+    }
+}
 
 class PSPDFKitView extends React.Component {
   _nextRequestId = 1;
@@ -715,4 +730,11 @@ if (Platform.OS === "ios" || Platform.OS === "android") {
     }
   );
   module.exports = PSPDFKitView;
+
+  var RCTPSPDFKitImageView = requireNativeComponent(
+    "RCTImageView",
+    PSPDFKitImageView
+  );
+
+  module.exports = PSPDFKitImageView;
 }
