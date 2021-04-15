@@ -38,6 +38,7 @@ public class PSPDFKitPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         List<ViewManager> viewManagers = new ArrayList<>();
+        viewManagers.add(new ReactImageManager());
         viewManagers.add(new ReactPdfViewManager());
         return viewManagers;
     }
