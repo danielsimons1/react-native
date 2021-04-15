@@ -12,12 +12,12 @@ import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.ReadableArray;
 
-public class ReactImageManager extends SimpleViewManager<ReactImageView> {
+public class ReactImageViewManager extends SimpleViewManager<ReactImageView> {
 
   public static final String REACT_CLASS = "RCTImageView";
   ReactApplicationContext mCallerContext;
 
-  public ReactImageManager(ReactApplicationContext reactContext) {
+  public ReactImageViewManager(ReactApplicationContext reactContext) {
     mCallerContext = reactContext;
   }
 
