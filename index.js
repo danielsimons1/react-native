@@ -729,12 +729,14 @@ if (Platform.OS === "ios" || Platform.OS === "android") {
       },
     }
   );
-  module.exports = PSPDFKitView;
 
   var RCTPSPDFKitImageView = requireNativeComponent(
     "RCTImageView",
     PSPDFKitImageView
   );
 
-  module.exports = PSPDFKitImageView;
+  module.exports = {
+    PSPDFKitImageView: PSPDFKitImageView,
+    PSPDFKitView: PSPDFKitView
+  }
 }
