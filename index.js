@@ -26,21 +26,21 @@ import {
  * - resizeMode: 'cover' | 'contain' | 'stretch'
  */
 
-class PSPDFKitImageView extends React.Component {
-
-    render() {
-        if (Platform.OS === "ios" || Platform.OS === "android") {
-
-            return (
-                <RCTImageView
-                    {...this.props}
-                />
-            );
-        } else {
-            return null;
-        }
-    }
-}
+//class PSPDFKitImageView extends React.Component {
+//
+//    render() {
+//        if (Platform.OS === "ios" || Platform.OS === "android") {
+//
+//            return (
+//                <RCTImageView
+//                    {...this.props}
+//                />
+//            );
+//        } else {
+//            return null;
+//        }
+//    }
+//}
 
 class PSPDFKitView extends React.Component {
   _nextRequestId = 1;
@@ -730,11 +730,11 @@ if (Platform.OS === "ios" || Platform.OS === "android") {
     }
   );
 
-  var RCTPSPDFKitImageView = requireNativeComponent(
-    "RCTImageView",
-    PSPDFKitImageView
-  );
+//  var RCTPSPDFKitImageView = requireNativeComponent(
+//    "RCTImageView",
+//    PSPDFKitImageView
+//  );
 
   module.exports.PSPDFKitView = PSPDFKitView;
-  module.exports.PSPDFKitImageView = PSPDFKitImageView;
+  //module.exports.PSPDFKitImageView = PSPDFKitImageView;
 }
