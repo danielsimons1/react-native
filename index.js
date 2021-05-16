@@ -730,7 +730,7 @@ if (Platform.OS === "ios" || Platform.OS === "android") {
     }
   );
 
-  var RCTPSPDFKitImageView = requireNativeComponent(
+  var RCTDocumentImageView = requireNativeComponent(
     "RCTDocumentImageView",
     PSPDFKitImageView
   );
