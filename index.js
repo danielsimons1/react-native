@@ -13,6 +13,7 @@ import {
   Platform,
   findNodeHandle,
   NativeModules,
+  Text,
   UIManager,
 } from "react-native";
 
