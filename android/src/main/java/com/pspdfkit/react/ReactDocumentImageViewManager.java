@@ -7,6 +7,7 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.views.image.ReactImageView;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.pspdfkit.views.PdfView;
 
 import androidx.annotation.Nullable;
 
