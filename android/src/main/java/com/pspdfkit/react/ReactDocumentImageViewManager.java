@@ -30,6 +30,11 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
         view.setSource(sources);
     }
 
+    @ReactProp(name = "pageIndex")
+    public void setPageIndex(PdfView view, int pageIndex) {
+        view.setPageIndex(pageIndex);
+    }
+
     @Override
     public String getName() {
         return "RCTDocumentImageView";

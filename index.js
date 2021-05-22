@@ -34,7 +34,9 @@ class PSPDFKitImageView extends React.Component {
             return (
                 <RCTDocumentImageView
                     {...this.props}
-                />
+                >
+                    <Text>{this.props.title}</Text>
+                </RCTDocumentImageView>
             );
         } else {
             return null;
