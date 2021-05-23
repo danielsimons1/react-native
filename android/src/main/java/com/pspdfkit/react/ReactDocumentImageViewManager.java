@@ -1,6 +1,7 @@
 
 package com.pspdfkit.react;
 
+import android.graphics.Color;
 import android.util.Log;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
@@ -25,7 +26,9 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
 
     @Override
     public ReactImageView createViewInstance(ThemedReactContext context) {
-        return new ReactImageView(context, Fresco.newDraweeControllerBuilder(), null, mCallerContext);
+        ReactImageView v = new ReactImageView(context, Fresco.newDraweeControllerBuilder(), null, mCallerContext);
+        v.setBackgroundColor(Color.RED);
+        return v;
     }
 
     @ReactProp(name = "src")
