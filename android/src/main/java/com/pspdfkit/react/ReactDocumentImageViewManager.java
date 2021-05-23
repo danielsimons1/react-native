@@ -39,6 +39,11 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
         view.setPageIndex(pageIndex);
     }
 
+    @ReactProp(name = "scaleType")
+    public void setResizeMode(ReactImageView view, @Nullable String resizeMode) {
+        view.setScaleType(ImageResizeMode.toScaleType(resizeMode));
+    }
+
     @Override
     public String getName() {
         return "RCTDocumentImageView";
