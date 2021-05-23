@@ -1,6 +1,10 @@
 
 package com.pspdfkit.react;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
+
 import android.graphics.Color;
 import android.util.Log;
 import com.facebook.react.uimanager.annotations.ReactProp;
