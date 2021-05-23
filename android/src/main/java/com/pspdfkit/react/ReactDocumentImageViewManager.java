@@ -19,6 +19,12 @@ import com.facebook.react.bridge.ReadableArray;
 public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageView> {
 
     ReactApplicationContext mCallerContext;
+    private ImgStartListener imgStartListener;
+
+    /* Interface Listener to start loading the image if the source is set */
+    private interface ImgStartListener {
+        void startLoading(String imgUrl);
+    }
 
     public ReactDocumentImageViewManager(ReactApplicationContext reactContext) {
         mCallerContext = reactContext;
@@ -26,16 +32,48 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
 
     @Override
     public ReactImageView createViewInstance(ThemedReactContext context) {
-        ReactImageView v = new ReactImageView(context, Fresco.newDraweeControllerBuilder(), null, mCallerContext);
-        v.setBackgroundColor(Color.RED);
-        return v;
+        ReactImageView reactImageView = new ReactImageView(context, Fresco.newDraweeControllerBuilder(), null, mCallerContext);
+        reactImageView.setBackgroundColor(Color.BLUE);
+
+        final Handler handler = new Handler();
+        imgStartListener = new ImgStartListener() {
+            @Override
+            public void startLoading(String imgUrl) {
+                startDownloading(imgUrl, handler, reactImageView);
+            }
+        };
+        return reactImageView;
+    }
+
+    private void startDownloading(final String imgUrl, final Handler handler, final ReactImageView reactImageView) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(imgUrl);
+                    final Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                    setImage(bmp, handler, reactImageView);
+                } catch (Exception e) {
+                    Log.e("ReactImageManager", "Error : " + e.getMessage());
+                }
+            }
+        }).start();
+    }
+
+    private void setImage(final Bitmap bmp, Handler handler, final ReactImageView reactImageView) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                reactImageView.setImageBitmap(bmp);
+            }
+        });
     }
 
     @ReactProp(name = "src")
-    public void setSrc(ReactImageView view, @Nullable ReadableArray sources) {
-        Log.i("ReactDocumentImageViewManager", sources.toString());
+    public void setSrc(ReactImageView view, String uri) {
+        Log.i("ReactDocumentImageViewManager", uri);
 
-        view.setSource(sources);
+        imgStartListener.startLoading(uri);
     }
 
     @ReactProp(name = "pageIndex")
