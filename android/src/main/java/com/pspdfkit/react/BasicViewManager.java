@@ -24,10 +24,10 @@ public class BasicViewManager extends SimpleViewManager<View> {
         return v;
     }
 
-    @ReactProp(name = "backgroundColor")
-    public void setSrc(ReactImageView view, @Nullable String color) {
-        view.setBackgroundColor(color);
-    }
+//    @ReactProp(name = "backgroundColor")
+//    public void setSrc(ReactImageView view, @Nullable int color) {
+//        view.setBackgroundColor(color);
+//    }
 
     @Override
     public String getName() {
