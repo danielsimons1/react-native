@@ -1,6 +1,7 @@
 
 package com.pspdfkit.react;
 
+import android.util.Log;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -28,6 +29,8 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
 
     @ReactProp(name = "src")
     public void setSrc(ReactImageView view, @Nullable ReadableArray sources) {
+        Log.i("ReactDocumentImageViewManager", "Setting the src prop")
+
         view.setSource(sources);
     }
 
