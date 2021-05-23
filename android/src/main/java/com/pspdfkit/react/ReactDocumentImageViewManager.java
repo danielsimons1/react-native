@@ -29,7 +29,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
 
     @ReactProp(name = "src")
     public void setSrc(ReactImageView view, @Nullable ReadableArray sources) {
-        Log.i("ReactDocumentImageViewManager", "Setting the src prop")
+        Log.i("ReactDocumentImageViewManager", "Setting the src prop");
 
         view.setSource(sources);
     }
