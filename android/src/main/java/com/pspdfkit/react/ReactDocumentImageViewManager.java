@@ -1,12 +1,15 @@
 
 package com.pspdfkit.react;
 
+import com.pspdfkit.views.PdfView;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 
 import android.graphics.Color;
 import android.util.Log;
+
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -14,11 +17,11 @@ import com.facebook.react.views.image.ImageResizeMode;
 import com.facebook.react.views.image.ReactImageView;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.pspdfkit.views.PdfView;
+import com.facebook.react.bridge.ReadableArray;
 
 import androidx.annotation.Nullable;
 
-import com.facebook.react.bridge.ReadableArray;
+import java.net.URL;
 
 public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageView> {
 
