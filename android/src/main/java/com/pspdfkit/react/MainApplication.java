@@ -14,6 +14,7 @@
 package com.pspdfkit.react;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -25,6 +26,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
+
+    private static MainApplication instance;
+
+    public static Context getContext() {
+        return instance;
+    }
 
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
         @Override
@@ -50,5 +57,6 @@ public class MainApplication extends Application implements ReactApplication {
     public void onCreate() {
         super.onCreate();
         SoLoader.init(this, /* native exopackage */ false);
+        instance = this;
     }
 }
