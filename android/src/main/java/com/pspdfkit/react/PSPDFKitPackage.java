@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import main.java.com.pspdfkit.react.BasicViewManager;
+
 public class PSPDFKitPackage implements ReactPackage {
 
     @Override
@@ -40,7 +42,7 @@ public class PSPDFKitPackage implements ReactPackage {
         List<ViewManager> viewManagers = new ArrayList<>();
         viewManagers.add(new ReactPdfViewManager());
         viewManagers.add(new ReactDocumentImageViewManager(reactContext));
-
+        viewManagers.add(new BasicViewManager(reactContext));
         return viewManagers;
     }
 }

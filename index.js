@@ -44,6 +44,23 @@ class PSPDFKitImageView extends React.Component {
     }
 }
 
+class PSPDFKitBasicView extends React.Component {
+
+    render() {
+        if (Platform.OS === "ios" || Platform.OS === "android") {
+
+            return (
+                <RCTBasicView
+                    {...this.props}
+                >
+                </RCTBasicView>
+            );
+        } else {
+            return null;
+        }
+    }
+}
+
 class PSPDFKitView extends React.Component {
   _nextRequestId = 1;
   _requestMap = new Map();
@@ -737,6 +754,12 @@ if (Platform.OS === "ios" || Platform.OS === "android") {
     PSPDFKitImageView
   );
 
+  var RCTBasicView = requireNativeComponent(
+    "RCTBasicView",
+    PSPDFKitBasicView
+  )
+
   module.exports.PSPDFKitView = PSPDFKitView;
   module.exports.PSPDFKitImageView = PSPDFKitImageView;
+  module.exports.PSPDFKitBasicView = PSPDFKItBasicView;
 }
