@@ -17,6 +17,7 @@ import android.net.Uri;
 
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.react.MainApplication;
+import com.facebook.react.bridge.ReactApplicationContext;
 import com.pspdfkit.document.PdfDocumentLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,6 +32,7 @@ import java.io.File;
 public class PDFDocumentHelper {
 
         private static PDFDocumentHelper INSTANCE = null;
+        private ReactApplicationContext reactAppContext = null;
 
         private static final String FILE_SCHEME = "file:///";
 
@@ -38,13 +40,14 @@ public class PDFDocumentHelper {
         public PdfDocument document = null;
         private Disposable documentOpeningDisposable;
 
-        private PDFDocumentHelper() {
+        private PDFDocumentHelper(ReactApplicationContext context) {
+            this.reactAppContext = context;
             setDocument("file:///android_asset/FullBook_V9.pdf");
         };
 
-        public static PDFDocumentHelper getInstance() {
+        public static PDFDocumentHelper getInstance(ReactApplicationContext reactAppContext) {
             if (INSTANCE == null) {
-                INSTANCE = new PDFDocumentHelper();
+                INSTANCE = new PDFDocumentHelper(reactAppContext);
             }
             return(INSTANCE);
         }
@@ -68,7 +71,7 @@ public class PDFDocumentHelper {
             documentOpeningDisposable.dispose();
         }
 
-        documentOpeningDisposable = PdfDocumentLoader.openDocumentAsync(com.pspdfkit.react.MainApplication.getContext(), Uri.parse(documentPath))
+        documentOpeningDisposable = PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(documentPath))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pdfDocument -> {
