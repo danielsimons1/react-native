@@ -46,7 +46,6 @@ public class PDFDocumentHelper {
 
         private PDFDocumentHelper(ReactApplicationContext context) {
             this.reactAppContext = context;
-            setDocument(this.documentPath);
         };
 
         public static PDFDocumentHelper getInstance(ReactApplicationContext reactAppContext) {
@@ -56,11 +55,7 @@ public class PDFDocumentHelper {
             return(INSTANCE);
         }
 
-    public void setDocument(@Nullable String documentPath) {
-        if (documentPath == null) {
-            this.document = null;
-            return;
-        }
+    public void setDocument() {
 
         if (Uri.parse(documentPath).getScheme() == null) {
             // If there is no scheme it might be a raw path.
@@ -76,7 +71,7 @@ public class PDFDocumentHelper {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pdfDocument -> {
-                    this.document = pdfDocument;
+                    com.pspdfkit.react.helper.PDFDocumentHelper.this.document = pdfDocument;
                 }, throwable -> {
                     Log.e("PDFDocumentHelper", "throwing: $throwable");
                 });
