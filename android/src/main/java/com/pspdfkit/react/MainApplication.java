@@ -57,6 +57,6 @@ public class MainApplication extends Application implements ReactApplication {
         SoLoader.init(this, /* native exopackage */ false);
         instance = this;
 
-        PDFDocumentHelper.getInstance(this.getApplicationContext()).setDocument();
+        PDFDocumentHelper.getInstance(this).setDocument();
     }
 }
