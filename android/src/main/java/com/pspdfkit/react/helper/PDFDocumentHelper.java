@@ -89,8 +89,6 @@ public class PDFDocumentHelper {
         }
 
         return PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(this.documentPath))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
     }
 
 }
