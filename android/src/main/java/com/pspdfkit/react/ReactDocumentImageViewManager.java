@@ -1,5 +1,5 @@
 
-package main.java.com.pspdfkit.react;
+package com.pspdfkit.react;
 
 import com.pspdfkit.views.PdfView;
 
