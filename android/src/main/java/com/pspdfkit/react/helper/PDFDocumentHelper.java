@@ -72,9 +72,9 @@ public class PDFDocumentHelper {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pdfDocument -> {
-                    com.pspdfkit.react.helper.PDFDocumentHelper.this.document = pdfDocument;
+                    this.document = pdfDocument;
                 }, throwable -> {
-                    com.pspdfkit.react.helper.PDFDocumentHelper.this.document = null;
+                    this.document = null;
                 });
     }
 
