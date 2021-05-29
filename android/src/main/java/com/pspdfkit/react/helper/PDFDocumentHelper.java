@@ -13,11 +13,11 @@
 
 package main.java.com.pspdfkit.react.helper;
 
-
 import android.net.Uri;
 
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.react.MainApplication;
+import com.pspdfkit.document.PdfDocumentLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -32,7 +32,9 @@ public class PDFDocumentHelper {
 
         private static PDFDocumentHelper INSTANCE = null;
 
-        // other instance variables can be here
+        private static final String FILE_SCHEME = "file:///";
+
+    // other instance variables can be here
         public PdfDocument document = null;
         private Disposable documentOpeningDisposable;
 

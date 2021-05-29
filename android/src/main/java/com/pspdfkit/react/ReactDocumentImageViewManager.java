@@ -1,7 +1,10 @@
 
-package com.pspdfkit.react;
+package main.java.com.pspdfkit.react;
 
 import com.pspdfkit.views.PdfView;
+
+import com.pspdfkit.document.PdfDocument;
+import com.pspdfkit.react.MainApplication;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,8 +25,6 @@ import com.facebook.react.bridge.ReadableArray;
 import androidx.annotation.Nullable;
 
 import java.net.URL;
-
-import com.pspdfkit.document.PdfDocument;
 
 import main.java.com.pspdfkit.react.helper.PDFDocumentHelper;
 
