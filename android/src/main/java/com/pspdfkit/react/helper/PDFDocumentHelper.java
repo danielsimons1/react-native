@@ -35,7 +35,7 @@ import java.io.File;
 public class PDFDocumentHelper {
 
         private static PDFDocumentHelper INSTANCE = null;
-        private ReactApplicationContext reactAppContext = null;
+        private Context reactAppContext = null;
 
         private static final String FILE_SCHEME = "file:///";
 
@@ -44,16 +44,20 @@ public class PDFDocumentHelper {
     // other instance variables can be here
         public PdfDocument document = null;
 
-        private PDFDocumentHelper(ReactApplicationContext context) {
+        private PDFDocumentHelper(Context context) {
             this.reactAppContext = context;
         };
 
-        public static PDFDocumentHelper getInstance(ReactApplicationContext reactAppContext) {
+        public static PDFDocumentHelper getInstance(Context reactAppContext) {
             if (INSTANCE == null) {
                 INSTANCE = new PDFDocumentHelper(reactAppContext);
             }
             return(INSTANCE);
         }
+
+    public static PDFDocumentHelper getInstance() {
+        return(INSTANCE);
+    }
 
     public void setDocument() {
 
@@ -71,7 +75,8 @@ public class PDFDocumentHelper {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pdfDocument -> {
-                    com.pspdfkit.react.helper.PDFDocumentHelper.this.document = pdfDocument;
+                    Log.e("Found Document", "document was initialized");
+                    this.document = pdfDocument;
                 }, throwable -> {
                     Log.e("PDFDocumentHelper", "throwing: $throwable");
                 });
