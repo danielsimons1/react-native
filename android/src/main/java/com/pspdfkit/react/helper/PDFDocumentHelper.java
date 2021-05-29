@@ -25,6 +25,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
+import javax.annotation.Nullable;
 import java.io.File;
 
 public class PDFDocumentHelper {
