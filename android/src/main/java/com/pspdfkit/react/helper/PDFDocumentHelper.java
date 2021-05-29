@@ -14,6 +14,7 @@
 package main.java.com.pspdfkit.react.helper;
 
 import android.net.Uri;
+import android.util.Log;
 
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.react.MainApplication;
@@ -36,13 +37,15 @@ public class PDFDocumentHelper {
 
         private static final String FILE_SCHEME = "file:///";
 
+        private String documentPath = "file:///android_asset/FullBook_V9.pdf";
+
     // other instance variables can be here
         public PdfDocument document = null;
         private Disposable documentOpeningDisposable;
 
         private PDFDocumentHelper(ReactApplicationContext context) {
             this.reactAppContext = context;
-            setDocument("file:///android_asset/FullBook_V9.pdf");
+            setDocument(this.documentPath);
         };
 
         public static PDFDocumentHelper getInstance(ReactApplicationContext reactAppContext) {
@@ -79,6 +82,26 @@ public class PDFDocumentHelper {
                 }, throwable -> {
                     this.document = null;
                 });
+    }
+
+    public void getDocument() -> Single<PdfDocument> {
+        if (this.document != null) {
+            return Single.just(this.document);
+        }
+
+        if (documentOpeningDisposable != null) {
+            documentOpeningDisposable.dispose();
+        }
+
+        return PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(this.documentPath))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(pdfDocument -> {
+                    this.document = pdfDocument;
+                }, throwable -> {
+                    Log.e("PDFDocumentHelper", "throwing: $throwable");
+                });
+
     }
 
 }
