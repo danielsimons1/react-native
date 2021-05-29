@@ -16,6 +16,8 @@ package main.java.com.pspdfkit.react.helper;
 import android.net.Uri;
 import android.util.Log;
 
+import io.reactivex.Single;
+
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.react.MainApplication;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -70,6 +72,7 @@ public class PDFDocumentHelper {
                 documentPath = FILE_SCHEME + document;
             }
         }
+
         if (documentOpeningDisposable != null) {
             documentOpeningDisposable.dispose();
         }
@@ -84,7 +87,7 @@ public class PDFDocumentHelper {
                 });
     }
 
-    public void getDocument() -> Single<PdfDocument> {
+    public Single<PdfDocument> getDocument() {
         if (this.document != null) {
             return Single.just(this.document);
         }
