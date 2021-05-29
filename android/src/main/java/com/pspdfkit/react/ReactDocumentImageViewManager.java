@@ -8,6 +8,7 @@ import com.pspdfkit.react.MainApplication;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Handler;
 
 import android.graphics.Color;
@@ -22,20 +23,22 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.react.bridge.ReadableArray;
 
+import com.pspdfkit.document.PdfDocumentLoader;
+
 import androidx.annotation.Nullable;
 
 import java.net.URL;
-
-import main.java.com.pspdfkit.react.helper.PDFDocumentHelper;
 
 public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageView> {
 
     ReactApplicationContext mCallerContext;
     private ImgStartListener imgStartListener;
 
+    private PdfDocument pdfDocument;
+
     /* Interface Listener to start loading the image if the source is set */
     private interface ImgStartListener {
-        void startLoading(String imgUrl);
+        void startLoading();
     }
 
     public ReactDocumentImageViewManager(ReactApplicationContext reactContext) {
@@ -50,35 +53,26 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
         final Handler handler = new Handler();
         imgStartListener = new ImgStartListener() {
             @Override
-            public void startLoading(String imgUrl) {
-                startDownloading(imgUrl, handler, reactImageView);
+            public void startLoading() {
+                startDownloading(handler, reactImageView);
             }
         };
         return reactImageView;
     }
 
-    private void startDownloading(final String imgUrl, final Handler handler, final ReactImageView reactImageView) {
+    private void startDownloading(final Handler handler, final ReactImageView reactImageView) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
 
-                    PDFDocumentHelper.getInstance().getDocument()
-                        .subscribe(pdfDocument -> {
-                            pdfDocument.renderPageToBitmapAsync(mCallerContext, 1, 50, 100)
-                                    .subscribe(bmp -> {
-                                        setImage(bmp, handler, reactImageView);
-                                    }, error -> {
-                                        //handle error
-                                        Log.e("ReactImageManager", "Error : " + error.getMessage());
-                                    });
-
-                            URL url = new URL(imgUrl);
-                            final Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                            setImage(bmp, handler, reactImageView);
-                        }, error1 -> {
-                            Log.e("ReactDocumentImageViewManager", "error: " + error1.getMessage());
-                        });
+                    pdfDocument.renderPageToBitmapAsync(mCallerContext, 1, 50, 100)
+                            .subscribe(bmp -> {
+                                setImage(bmp, handler, reactImageView);
+                                }, error -> {
+                                //handle error
+                                Log.e("ReactImageManager", "Error : " + error.getMessage());
+                            });
 
                 } catch (Exception e) {
                     Log.e("ReactImageManager", "Error : " + e.getMessage());
@@ -96,11 +90,22 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
         });
     }
 
-    @ReactProp(name = "src")
-    public void setSrc(ReactImageView view, String uri) {
-        Log.i("ReactDocumentImageViewManager", uri);
+    @ReactProp(name = "document")
+    public void setDocument(ReactImageView view, String document) {
+        Log.i("ReactDocumentImageViewManager", document);
 
-        imgStartListener.startLoading(uri);
+        PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(documentPath))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(document -> {
+                    Log.e("Found Document", "document was initialized");
+                    this.pdfDocument = document;
+                    imgStartListener.startLoading();
+                }, throwable -> {
+                    Log.e("PDFDocumentHelper", "throwing: $throwable");
+                });
+
+
     }
 
     @ReactProp(name = "pageIndex")
