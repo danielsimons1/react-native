@@ -20,8 +20,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
-    <application
-        android:name="com.pspdfkit.react.MainApplication">
+    <application>
         <activity
             android:name="com.pspdfkit.ui.PdfActivity"
             android:windowSoftInputMode="adjustNothing" />
