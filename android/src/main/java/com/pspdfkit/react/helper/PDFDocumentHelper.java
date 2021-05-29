@@ -43,7 +43,6 @@ public class PDFDocumentHelper {
 
     // other instance variables can be here
         public PdfDocument document = null;
-        private Disposable documentOpeningDisposable;
 
         private PDFDocumentHelper(ReactApplicationContext context) {
             this.reactAppContext = context;
@@ -73,10 +72,6 @@ public class PDFDocumentHelper {
             }
         }
 
-        if (documentOpeningDisposable != null) {
-            documentOpeningDisposable.dispose();
-        }
-
         documentOpeningDisposable = PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(documentPath))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -90,10 +85,6 @@ public class PDFDocumentHelper {
     public Single<PdfDocument> getDocument() {
         if (this.document != null) {
             return Single.just(this.document);
-        }
-
-        if (documentOpeningDisposable != null) {
-            documentOpeningDisposable.dispose();
         }
 
         return PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(this.documentPath))
