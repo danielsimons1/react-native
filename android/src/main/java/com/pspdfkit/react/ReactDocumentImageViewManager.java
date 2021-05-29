@@ -23,6 +23,10 @@ import androidx.annotation.Nullable;
 
 import java.net.URL;
 
+import com.pspdfkit.document.PdfDocument;
+
+import main.java.com.pspdfkit.react.helper.PDFDocumentHelper;
+
 public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageView> {
 
     ReactApplicationContext mCallerContext;
@@ -57,6 +61,15 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
             @Override
             public void run() {
                 try {
+                    PDFDocument document = PDFDocumentHelper.getInstance().document;
+                    document.renderPageToBitmapAsync(com.pspdfkit.react.MainApplication.getContext(), 1, 50, 100)
+                        .subscribe(bmp -> {
+                            setImage(bmp, handler, reactImageView);
+                        }, error -> {
+                            //handle error
+                            Log.e("ReactImageManager", "Error : " + error.getMessage());
+                        });
+
                     URL url = new URL(imgUrl);
                     final Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                     setImage(bmp, handler, reactImageView);
