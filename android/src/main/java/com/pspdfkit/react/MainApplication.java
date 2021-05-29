@@ -29,10 +29,6 @@ public class MainApplication extends Application implements ReactApplication {
 
     private static MainApplication instance;
 
-    public static Context getContext() {
-        return instance.getApplicationContext();
-    }
-
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {

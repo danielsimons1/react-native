@@ -64,7 +64,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
                 try {
 
                     PdfDocument document = PDFDocumentHelper.getInstance(mCallerContext).document;
-                    document.renderPageToBitmapAsync(com.pspdfkit.react.MainApplication.getContext(), 1, 50, 100)
+                    document.renderPageToBitmapAsync(mCallerContext, 1, 50, 100)
                         .subscribe(bmp -> {
                             setImage(bmp, handler, reactImageView);
                         }, error -> {
