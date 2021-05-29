@@ -63,18 +63,23 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
             public void run() {
                 try {
 
-                    PdfDocument document = PDFDocumentHelper.getInstance(mCallerContext).getDocument();
-                    document.renderPageToBitmapAsync(mCallerContext, 1, 50, 100)
-                        .subscribe(bmp -> {
+                    PDFDocumentHelper.getInstance(mCallerContext).getDocument()
+                        .subscribe(pdfDocument -> {
+                            document.renderPageToBitmapAsync(mCallerContext, 1, 50, 100)
+                                    .subscribe(bmp -> {
+                                        setImage(bmp, handler, reactImageView);
+                                    }, error -> {
+                                        //handle error
+                                        Log.e("ReactImageManager", "Error : " + error.getMessage());
+                                    });
+
+                            URL url = new URL(imgUrl);
+                            final Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                             setImage(bmp, handler, reactImageView);
-                        }, error -> {
-                            //handle error
-                            Log.e("ReactImageManager", "Error : " + error.getMessage());
+                        }, error1 -> {
+                            Log.e("ReactDocumentImageViewManager", "error: " + error1.getMessage());
                         });
 
-                    URL url = new URL(imgUrl);
-                    final Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    setImage(bmp, handler, reactImageView);
                 } catch (Exception e) {
                     Log.e("ReactImageManager", "Error : " + e.getMessage());
                 }
