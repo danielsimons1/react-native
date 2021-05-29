@@ -15,6 +15,7 @@ package main.java.com.pspdfkit.react.helper;
 
 import android.net.Uri;
 import android.util.Log;
+import android.content.Context;
 
 import io.reactivex.Single;
 
