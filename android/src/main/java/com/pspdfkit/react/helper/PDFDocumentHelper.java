@@ -83,7 +83,7 @@ public class PDFDocumentHelper {
                 .subscribe(pdfDocument -> {
                     this.document = pdfDocument;
                 }, throwable -> {
-                    this.document = null;
+                    Log.e("PDFDocumentHelper", "throwing: $throwable");
                 });
     }
 
@@ -98,13 +98,7 @@ public class PDFDocumentHelper {
 
         return PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(this.documentPath))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(pdfDocument -> {
-                    this.document = pdfDocument;
-                }, throwable -> {
-                    Log.e("PDFDocumentHelper", "throwing: $throwable");
-                });
-
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
 }
