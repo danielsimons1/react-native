@@ -88,7 +88,7 @@ public class PDFDocumentHelper {
             return Single.just(this.document);
         }
 
-        return PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(this.documentPath))
+        return PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(this.documentPath));
     }
 
 }
