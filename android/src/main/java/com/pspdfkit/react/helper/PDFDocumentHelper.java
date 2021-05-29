@@ -72,7 +72,7 @@ public class PDFDocumentHelper {
             }
         }
 
-        documentOpeningDisposable = PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(documentPath))
+        PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(documentPath))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pdfDocument -> {
