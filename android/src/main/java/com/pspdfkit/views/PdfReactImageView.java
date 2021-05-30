@@ -11,6 +11,8 @@ import com.facebook.drawee.view.GenericDraweeView;
 
 import java.util.LinkedList;
 
+import androidx.annotation.Nullable;
+
 public class PdfReactImageView extends ReactImageView {
     public int pageIndex = 0;
 
