@@ -36,9 +36,6 @@ import java.net.URL;
 public class ReactDocumentImageViewManager extends SimpleViewManager<PdfReactImageView> {
 
     ReactApplicationContext mCallerContext;
-    private ImgStartListener imgStartListener;
-
-    private PdfDocument pdfDocument;
 
     /* Interface Listener to start loading the image if the source is set */
     private interface ImgStartListener {
@@ -53,39 +50,9 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<PdfReactIma
     @Override
     public PdfReactImageView createViewInstance(ThemedReactContext context) {
         PdfReactImageView reactImageView = new PdfReactImageView(context, Fresco.newDraweeControllerBuilder(), mCallerContext);
-        reactImageView.setBackgroundColor(Color.BLUE);
+        reactImageView.setBackgroundColor(Color.GREEN);
 
-        final Handler handler = new Handler();
-        imgStartListener = new ImgStartListener() {
-            @Override
-            public void startLoading() {
-                startDownloading(handler, reactImageView);
-            }
-        };
         return reactImageView;
-    }
-
-    private void startDownloading(final Handler handler, final PdfReactImageView reactImageView) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-
-                    Log.e("ReactImageViewManager", "it is time to render page to bitmap for " + reactImageView.getPageIndex());
-                    pdfDocument.renderPageToBitmapAsync(mCallerContext, reactImageView.getPageIndex(), 50, 100)
-                            .subscribe(bmp -> {
-                                Log.e("ReactImageViewManager", "setImage with the bitmap we just retrieved!!!!");
-                                setImage(bmp, handler, reactImageView);
-                                }, error -> {
-                                //handle error
-                                Log.e("ReactImageManager", "Error : " + error.getMessage());
-                            });
-
-                } catch (Exception e) {
-                    Log.e("ReactImageManager", "Error : " + e.getMessage());
-                }
-            }
-        }).start();
     }
 
     private void setImage(final Bitmap bmp, Handler handler, final PdfReactImageView reactImageView) {
@@ -106,8 +73,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<PdfReactIma
                 .subscribeOn(Schedulers.io())
                 .subscribe(pdfDoc -> {
                     Log.e("Found Document", "document was initialized");
-                    ReactDocumentImageViewManager.this.pdfDocument = pdfDoc;
-                    imgStartListener.startLoading();
+                    view.startLoading();
                 }, throwable -> {
                     Log.e("PDFDocumentHelper", "throwing: $throwable" + documentPath + " : " + throwable.getMessage());
                 });
