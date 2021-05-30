@@ -62,4 +62,6 @@ dependencies {
         exclude group: 'com.google.auto.value', module: 'auto-value'
     }
     implementation "com.facebook.react:react-native:+"
+    //Google material design
+    implementation 'com.google.android.material:material:1.0.0'
 }
