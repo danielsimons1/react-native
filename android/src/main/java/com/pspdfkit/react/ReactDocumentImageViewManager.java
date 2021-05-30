@@ -23,6 +23,9 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.react.bridge.ReadableArray;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 import com.pspdfkit.document.PdfDocumentLoader;
 
 import androidx.annotation.Nullable;
@@ -94,12 +97,12 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
     public void setDocument(ReactImageView view, String document) {
         Log.i("ReactDocumentImageViewManager", document);
 
-        PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(documentPath))
+        PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(document))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(document -> {
+                .subscribe(pdfDoc -> {
                     Log.e("Found Document", "document was initialized");
-                    this.pdfDocument = document;
+                    this.pdfDocument = pdfDoc;
                     imgStartListener.startLoading();
                 }, throwable -> {
                     Log.e("PDFDocumentHelper", "throwing: $throwable");
