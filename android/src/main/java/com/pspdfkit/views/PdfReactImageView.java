@@ -1,4 +1,4 @@
-package main.java.com.pspdfkit.views;
+package com.pspdfkit.views;
 
 import com.facebook.react.views.image.ReactImageView;
 
