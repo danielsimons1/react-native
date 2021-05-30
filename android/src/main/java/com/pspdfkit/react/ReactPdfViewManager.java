@@ -44,6 +44,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+import com.facebook.react.views.image.ReactImageView;
+
 /**
  * Exposes {@link PdfView} to react-native.
  */

@@ -18,7 +18,6 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.views.image.ImageResizeMode;
-import com.facebook.react.views.image.ReactImageView;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.react.bridge.ReadableArray;
@@ -26,6 +25,7 @@ import com.facebook.react.bridge.ReadableArray;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import main.java.com.pspdfkit.react.helper.PDFDocumentHelper;
+import com.pspdfkit.react.views.PdfReactImageView;
 
 import com.pspdfkit.document.PdfDocumentLoader;
 
@@ -33,7 +33,7 @@ import androidx.annotation.Nullable;
 
 import java.net.URL;
 
-public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageView> {
+public class ReactDocumentImageViewManager extends SimpleViewManager<PdfReactImageView> {
 
     ReactApplicationContext mCallerContext;
     private ImgStartListener imgStartListener;
@@ -51,8 +51,8 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
     }
 
     @Override
-    public ReactImageView createViewInstance(ThemedReactContext context) {
-        ReactImageView reactImageView = new ReactImageView(context, Fresco.newDraweeControllerBuilder(), null, mCallerContext);
+    public PdfReactImageView createViewInstance(ThemedReactContext context) {
+        PdfReactImageView reactImageView = new PdfReactImageView(context, Fresco.newDraweeControllerBuilder(), null, mCallerContext);
         reactImageView.setBackgroundColor(Color.BLUE);
 
         final Handler handler = new Handler();
@@ -65,13 +65,13 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
         return reactImageView;
     }
 
-    private void startDownloading(final Handler handler, final ReactImageView reactImageView) {
+    private void startDownloading(final Handler handler, final PdfReactImageView reactImageView) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
 
-                    pdfDocument.renderPageToBitmapAsync(mCallerContext, 1, 50, 100)
+                    pdfDocument.renderPageToBitmapAsync(mCallerContext, reactImageView.pageIndex, 50, 100)
                             .subscribe(bmp -> {
                                 setImage(bmp, handler, reactImageView);
                                 }, error -> {
@@ -86,7 +86,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
         }).start();
     }
 
-    private void setImage(final Bitmap bmp, Handler handler, final ReactImageView reactImageView) {
+    private void setImage(final Bitmap bmp, Handler handler, final PdfReactImageView reactImageView) {
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -96,7 +96,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
     }
 
     @ReactProp(name = "documentPath")
-    public void setDocument(ReactImageView view, String documentPath) {
+    public void setDocument(PdfReactImageView view, String documentPath) {
         Log.i("ReactDocumentImageViewManager", documentPath);
 
         // PdfDocumentLoader.openDocumentAsync(mCallerContext, Uri.parse(documentPath))
@@ -114,12 +114,12 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
     }
 
     @ReactProp(name = "pageIndex")
-    public void setPageIndex(PdfView view, int pageIndex) {
-        view.setPageIndex(pageIndex);
+    public void setPageIndex(PdfReactImageView view, int pageIndex) {
+        view.pageIndex = pageIndex;
     }
 
     @ReactProp(name = "scaleType")
-    public void setResizeMode(ReactImageView view, @Nullable String resizeMode) {
+    public void setResizeMode(PdfReactImageView view, @Nullable String resizeMode) {
         view.setScaleType(ImageResizeMode.toScaleType(resizeMode));
     }
 
