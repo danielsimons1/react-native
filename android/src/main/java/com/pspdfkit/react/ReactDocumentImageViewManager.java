@@ -71,7 +71,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<PdfReactIma
             public void run() {
                 try {
 
-                    pdfDocument.renderPageToBitmapAsync(mCallerContext, reactImageView.pageIndex, 50, 100)
+                    pdfDocument.renderPageToBitmapAsync(mCallerContext, reactImageView.getPageIndex(), 50, 100)
                             .subscribe(bmp -> {
                                 setImage(bmp, handler, reactImageView);
                                 }, error -> {
@@ -115,7 +115,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<PdfReactIma
 
     @ReactProp(name = "pageIndex")
     public void setPageIndex(PdfReactImageView view, int pageIndex) {
-        view.pageIndex = pageIndex;
+        view.setPageIndex(pageIndex);
     }
 
     @ReactProp(name = "scaleType")

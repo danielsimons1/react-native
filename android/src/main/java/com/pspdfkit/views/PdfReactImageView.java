@@ -14,12 +14,20 @@ import java.util.LinkedList;
 import androidx.annotation.Nullable;
 
 public class PdfReactImageView extends ReactImageView {
-    public int pageIndex = 0;
+    private int pageIndex = 0;
 
     public PdfReactImageView(
             Context context,
             AbstractDraweeControllerBuilder draweeControllerBuilder,
             @Nullable Object callerContext) {
         super(context, draweeControllerBuilder, null, callerContext);
+    }
+
+    public void setPageIndex(int pageIndex) {
+        this.pageIndex = pageIndex;
+    }
+
+    public int getPageIndex() {
+        return this.pageIndex;
     }
 }
