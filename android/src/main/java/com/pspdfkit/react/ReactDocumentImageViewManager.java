@@ -97,7 +97,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
     public void setDocument(ReactImageView view, String document) {
         Log.i("ReactDocumentImageViewManager", document);
 
-        PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(document))
+        PdfDocumentLoader.openDocumentAsync(mCallerContext, Uri.parse(document))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pdfDoc -> {
