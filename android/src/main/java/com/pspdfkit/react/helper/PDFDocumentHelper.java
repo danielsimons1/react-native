@@ -36,7 +36,7 @@ import java.io.File;
 public class PDFDocumentHelper {
 
         private static PDFDocumentHelper INSTANCE = null;
-        private Context reactAppContext = null;
+        private ReactApplicationContext reactAppContext = null;
 
         private static final String FILE_SCHEME = "file:///";
 
@@ -45,11 +45,11 @@ public class PDFDocumentHelper {
     // other instance variables can be here
         public PdfDocument document = null;
 
-        private PDFDocumentHelper(Context context) {
+        private PDFDocumentHelper(ReactApplicationContext context) {
             this.reactAppContext = context;
         };
 
-        public static PDFDocumentHelper getInstance(Context reactAppContext) {
+        public static PDFDocumentHelper getInstance(ReactApplicationContext reactAppContext) {
             if (INSTANCE == null) {
                 INSTANCE = new PDFDocumentHelper(reactAppContext);
             }
