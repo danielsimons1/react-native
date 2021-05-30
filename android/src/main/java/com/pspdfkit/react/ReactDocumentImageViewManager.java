@@ -93,11 +93,11 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
         });
     }
 
-    @ReactProp(name = "document")
-    public void setDocument(ReactImageView view, String document) {
-        Log.i("ReactDocumentImageViewManager", document);
+    @ReactProp(name = "documentPath")
+    public void setDocument(ReactImageView view, String documentPath) {
+        Log.i("ReactDocumentImageViewManager", documentPath);
 
-        PdfDocumentLoader.openDocumentAsync(mCallerContext, Uri.parse(document))
+        PdfDocumentLoader.openDocumentAsync(mCallerContext, Uri.parse(documentPath))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pdfDoc -> {
@@ -105,7 +105,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
                     this.pdfDocument = pdfDoc;
                     imgStartListener.startLoading();
                 }, throwable -> {
-                    Log.e("PDFDocumentHelper", "throwing: $throwable" + throwable.getMessage());
+                    Log.e("PDFDocumentHelper", "throwing: $throwable" + documentPath + " : " + throwable.getMessage());
                 });
 
 
