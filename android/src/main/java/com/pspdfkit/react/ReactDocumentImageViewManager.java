@@ -25,7 +25,7 @@ import com.facebook.react.bridge.ReadableArray;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import main.java.com.pspdfkit.react.helper.PDFDocumentHelper;
-import com.pspdfkit.react.views.PdfReactImageView;
+import main.java.com.pspdfkit.react.views.PdfReactImageView;
 
 import com.pspdfkit.document.PdfDocumentLoader;
 
