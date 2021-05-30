@@ -47,6 +47,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
 
     public ReactDocumentImageViewManager(ReactApplicationContext reactContext) {
         mCallerContext = reactContext;
+        Log.e("Initializing ReactDocumentImageViewManager", "it is time to init the react document image view manager!!!");
     }
 
     @Override
