@@ -55,15 +55,6 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<PdfReactIma
         return reactImageView;
     }
 
-    private void setImage(final Bitmap bmp, Handler handler, final PdfReactImageView reactImageView) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                reactImageView.setImageBitmap(bmp);
-            }
-        });
-    }
-
     @ReactProp(name = "documentPath")
     public void setDocument(PdfReactImageView view, String documentPath) {
         Log.i("ReactDocumentImageViewManager", documentPath);

@@ -1,6 +1,7 @@
 package com.pspdfkit.views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.Log;
 
@@ -37,7 +38,7 @@ public class PdfReactImageView extends ReactImageView {
         imgStartListener = new ImgStartListener() {
             @Override
             public void startLoading(PdfDocument doc) {
-                startDownloading(doc, handler, reactImageView);
+                startDownloading(doc, handler);
             }
         };
     }
@@ -54,17 +55,26 @@ public class PdfReactImageView extends ReactImageView {
         imgStartListener.startLoading(doc);
     }
 
-    private void startDownloading(PdfDocument doc, final Handler handler, final PdfReactImageView reactImageView) {
+    private void setImage(final Bitmap bmp, Handler handler) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                setImageBitmap(bmp);
+            }
+        });
+    }
+
+    private void startDownloading(PdfDocument doc, final Handler handler) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
 
-                    Log.e("ReactImageViewManager", "it is time to render page to bitmap for " + reactImageView.getPageIndex());
-                    doc.renderPageToBitmapAsync(mCallerContext, reactImageView.getPageIndex(), 50, 100)
+                    Log.e("ReactImageViewManager", "it is time to render page to bitmap for " + getPageIndex());
+                    doc.renderPageToBitmapAsync(mCallerContext, getPageIndex(), 50, 100)
                             .subscribe(bmp -> {
                                 Log.e("ReactImageViewManager", "setImage with the bitmap we just retrieved!!!!");
-                                setImage(bmp, handler, reactImageView);
+                                setImage(bmp, handler);
                             }, error -> {
                                 //handle error
                                 Log.e("ReactImageManager", "Error : " + error.getMessage());
