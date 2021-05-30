@@ -25,8 +25,6 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
-import main.java.com.pspdfkit.react.helper.PDFDocumentHelper;
-
 public class MainApplication extends Application implements ReactApplication {
 
     private static MainApplication instance;
@@ -56,7 +54,5 @@ public class MainApplication extends Application implements ReactApplication {
         super.onCreate();
         SoLoader.init(this, /* native exopackage */ false);
         instance = this;
-
-        PDFDocumentHelper.getInstance(this.getBaseContext()).setDocument();
     }
 }

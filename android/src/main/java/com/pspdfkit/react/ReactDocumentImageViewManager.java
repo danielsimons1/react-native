@@ -105,7 +105,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
                     this.pdfDocument = pdfDoc;
                     imgStartListener.startLoading();
                 }, throwable -> {
-                    Log.e("PDFDocumentHelper", "throwing: $throwable");
+                    Log.e("PDFDocumentHelper", "throwing: $throwable" + throwable.getMessage());
                 });
 
 
