@@ -50,10 +50,7 @@ public class PDFDocumentHelper {
         };
 
         public static PDFDocumentHelper getInstance(ReactApplicationContext reactAppContext) {
-            if (INSTANCE == null) {
-                INSTANCE = new PDFDocumentHelper(reactAppContext);
-            }
-            return(INSTANCE);
+            return new PDFDocumentHelper(reactAppContext);
         }
 
     public static PDFDocumentHelper getInstance() {
