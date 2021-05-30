@@ -15,7 +15,6 @@ import {
   NativeModules,
   Text,
   UIManager,
-  View
 } from "react-native";
 
 // ImageView.js
@@ -28,45 +27,16 @@ import {
  * - resizeMode: 'cover' | 'contain' | 'stretch'
  */
 
-class PSPDFKitImageViewer extends React.Component {
+class PSPDFKitImageView extends React.Component {
 
     render() {
         if (Platform.OS === "ios" || Platform.OS === "android") {
-            const tablesFiguresPageLabels = this.props.documentConfig;
 
             return (
-                <RCTDocumentImageViewer
+                <RCTDocumentImageView
                     {...this.props}
                 >
-                        {tablesFiguresPageLabels && tablesFiguresPageLabels.length > 0 && (tablesFiguresPageLabels.map((tableFigure, key) =>
-                          <View
-                          key={key}
-                          style={{
-                            width: 130,
-                            height: 210,
-                            margin: 2
-                          }}>
-//                          <PSPDFKitImageView
-//                            style={{
-//                              width: 130,
-//                              height: 60,
-//                              backgroundColor: Colors.green
-//                            }}
-//                            key={key}
-//                            documentPath="file:///android_asset/FullBook_V9.pdf"
-//                            scaleType="center"
-//                           />
-//                           <Text style={{
-//                             textAlign: 'center',
-//                             flex: 1,
-//                             flexWrap: 'wrap',
-//                             padding: 16,
-//                             fontSize: 11,
-//                           }}>{tableFigure}</Text>
-                           </View>
-                          )
-                        )}
-                </RCTDocumentImageViewer>
+                </RCTDocumentImageView>
             );
         } else {
             return null;
@@ -779,9 +749,9 @@ if (Platform.OS === "ios" || Platform.OS === "android") {
     }
   );
 
-  var RCTDocumentImageViewer = requireNativeComponent(
-    "RCTDocumentImageViewer",
-    PSPDFKitImageViewer
+  var RCTDocumentImageView = requireNativeComponent(
+    "RCTDocumentImageView",
+    PSPDFKitImageView
   );
 
   var RCTBasicView = requireNativeComponent(
@@ -790,6 +760,6 @@ if (Platform.OS === "ios" || Platform.OS === "android") {
   )
 
   module.exports.PSPDFKitView = PSPDFKitView;
-  module.exports.PSPDFKitImageViewer = PSPDFKitImageViewer;
+  module.exports.PSPDFKitImageView = PSPDFKitImageView;
   module.exports.PSPDFKitBasicView = PSPDFKitBasicView;
 }
