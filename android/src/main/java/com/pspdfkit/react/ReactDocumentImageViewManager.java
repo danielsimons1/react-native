@@ -50,7 +50,6 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<PdfReactIma
     @Override
     public PdfReactImageView createViewInstance(ThemedReactContext context) {
         PdfReactImageView reactImageView = new PdfReactImageView(context, Fresco.newDraweeControllerBuilder(), mCallerContext);
-        reactImageView.setBackgroundColor(Color.GREEN);
 
         return reactImageView;
     }
