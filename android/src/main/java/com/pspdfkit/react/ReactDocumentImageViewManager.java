@@ -13,9 +13,13 @@ import android.os.Handler;
 
 import android.graphics.Color;
 import android.util.Log;
+import android.view.View;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
+import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.views.image.ImageResizeMode;
 import com.facebook.react.views.image.ReactImageView;
@@ -32,7 +36,7 @@ import androidx.annotation.Nullable;
 
 import java.net.URL;
 
-public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageView> {
+public class ReactDocumentImageViewManager extends ViewGroupManager<CoordinatorLayout> {
 
     ReactApplicationContext mCallerContext;
     private ImgStartListener imgStartListener;
@@ -49,18 +53,22 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
     }
 
     @Override
-    public ReactImageView createViewInstance(ThemedReactContext context) {
-        ReactImageView reactImageView = new ReactImageView(context, Fresco.newDraweeControllerBuilder(), null, mCallerContext);
-        reactImageView.setBackgroundColor(Color.BLUE);
+    public CoordinatorLayout createViewInstance(ThemedReactContext context) {
 
-        final Handler handler = new Handler();
-        imgStartListener = new ImgStartListener() {
-            @Override
-            public void startLoading() {
-                startDownloading(handler, reactImageView);
-            }
-        };
-        return reactImageView;
+        return View(context);
+
+//        ReactImageView reactImageView = new ReactImageView(context, Fresco.newDraweeControllerBuilder(), null, mCallerContext);
+//        reactImageView.setBackgroundColor(Color.BLUE);
+//
+//        final Handler handler = new Handler();
+//        imgStartListener = new ImgStartListener() {
+//            @Override
+//            public void startLoading() {
+//                startDownloading(handler, reactImageView);
+//            }
+//        };
+//
+//        return reactImageView;
     }
 
     private void startDownloading(final Handler handler, final ReactImageView reactImageView) {
@@ -93,6 +101,10 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
         });
     }
 
+//    override private void addView(CoordinatorLayout view, @Nullable View child, Int index) {
+//
+//    }
+
     @ReactProp(name = "documentPath")
     public void setDocument(ReactImageView view, String documentPath) {
         Log.i("ReactDocumentImageViewManager", documentPath);
@@ -103,7 +115,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
                 .subscribe(pdfDoc -> {
                     Log.e("Found Document", "document was initialized");
                     this.pdfDocument = pdfDoc;
-                    imgStartListener.startLoading();
+                    //imgStartListener.startLoading();
                 }, throwable -> {
                     Log.e("PDFDocumentHelper", "throwing: $throwable" + documentPath + " : " + throwable.getMessage());
                 });
@@ -111,18 +123,18 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
 
     }
 
-    @ReactProp(name = "pageIndex")
-    public void setPageIndex(PdfView view, int pageIndex) {
-        view.setPageIndex(pageIndex);
-    }
-
-    @ReactProp(name = "scaleType")
-    public void setResizeMode(ReactImageView view, @Nullable String resizeMode) {
-        view.setScaleType(ImageResizeMode.toScaleType(resizeMode));
-    }
+//    @ReactProp(name = "pageIndex")
+//    public void setPageIndex(PdfView view, int pageIndex) {
+//        view.setPageIndex(pageIndex);
+//    }
+//
+//    @ReactProp(name = "scaleType")
+//    public void setResizeMode(ReactImageView view, @Nullable String resizeMode) {
+//        view.setScaleType(ImageResizeMode.toScaleType(resizeMode));
+//    }
 
     @Override
     public String getName() {
-        return "RCTDocumentImageView";
+        return "RCTDocumentImageViewer";
     }
 }
