@@ -73,7 +73,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<PdfReactIma
                 .subscribeOn(Schedulers.io())
                 .subscribe(pdfDoc -> {
                     Log.e("Found Document", "document was initialized");
-                    view.startLoading();
+                    view.load(pdfDoc);
                 }, throwable -> {
                     Log.e("PDFDocumentHelper", "throwing: $throwable" + documentPath + " : " + throwable.getMessage());
                 });

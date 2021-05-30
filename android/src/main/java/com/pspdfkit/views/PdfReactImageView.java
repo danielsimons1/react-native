@@ -24,7 +24,7 @@ public class PdfReactImageView extends ReactImageView {
 
     /* Interface Listener to start loading the image if the source is set */
     private interface ImgStartListener {
-        void startLoading();
+        void startLoading(PdfDocument doc);
     }
 
     public PdfReactImageView(
@@ -50,8 +50,8 @@ public class PdfReactImageView extends ReactImageView {
         return this.pageIndex;
     }
 
-    public void startLoading() {
-        imgStartListener.startLoading();
+    public void load(PdfDocument doc) {
+        imgStartListener.startLoading(doc);
     }
 
     private void startDownloading(PdfDocument doc, final Handler handler, final PdfReactImageView reactImageView) {
