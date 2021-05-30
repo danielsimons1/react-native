@@ -25,6 +25,7 @@ import com.facebook.react.bridge.ReadableArray;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import main.java.com.pspdfkit.react.helper.PDFDocumentHelper;
 
 import com.pspdfkit.document.PdfDocumentLoader;
 
@@ -97,7 +98,8 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<ReactImageV
     public void setDocument(ReactImageView view, String documentPath) {
         Log.i("ReactDocumentImageViewManager", documentPath);
 
-        PdfDocumentLoader.openDocumentAsync(mCallerContext, Uri.parse(documentPath))
+        // PdfDocumentLoader.openDocumentAsync(mCallerContext, Uri.parse(documentPath))
+        PDFDocumentHelper.getInstance().getDocument()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pdfDoc -> {
