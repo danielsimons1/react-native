@@ -71,8 +71,10 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<PdfReactIma
             public void run() {
                 try {
 
+                    Log.e("ReactImageViewManager", "it is time to render page to bitmap for " + reactImageView.getPageIndex());
                     pdfDocument.renderPageToBitmapAsync(mCallerContext, reactImageView.getPageIndex(), 50, 100)
                             .subscribe(bmp -> {
+                                Log.e("ReactImageViewManager", "setImage with the bitmap we just retrieved!!!!");
                                 setImage(bmp, handler, reactImageView);
                                 }, error -> {
                                 //handle error
