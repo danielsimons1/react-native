@@ -13,6 +13,7 @@ import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.view.GenericDraweeView;
 
 import java.util.LinkedList;
+import java.lang.Math;
 
 import androidx.annotation.Nullable;
 
@@ -69,9 +70,12 @@ public class PdfReactImageView extends ReactImageView {
         try {
             int idx = getPageIndex();
             Log.e("ReactImageViewManager", "it is time to render page to bitmap for " + idx);
-            Size pageSize = doc.getPageSize(idx);
 
-            doc.renderPageToBitmapAsync(getContext(), getPageIndex(), pageSize.width, pageSize.height)
+            Size pageSize = doc.getPageSize(idx);
+            int width = Math.round(pageSize.width);
+            int height = Math.round(pageSize.height);
+
+            doc.renderPageToBitmapAsync(getContext(), getPageIndex(), width, height)
                     .subscribe(bmp -> {
                         Log.e("ReactImageViewManager", "setImage with the bitmap we just retrieved!!!!");
                         setImage(bmp, handler);
