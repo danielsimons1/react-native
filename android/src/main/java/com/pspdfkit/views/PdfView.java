@@ -453,6 +453,7 @@ public class PdfView extends FrameLayout {
         // After attaching the PdfUiFragment we can access the PdfFragment.
         preparePdfFragment(pdfUiFragment.getPdfFragment());
 
+        Log.e("PdfView", "extraShit: " + this.configuration.getString("extraShit"));
         pdfUiFragment.getPSPDFKitViews().showView(PSPDFKitViews.Type.VIEW_THUMBNAIL_GRID);
     }
 
