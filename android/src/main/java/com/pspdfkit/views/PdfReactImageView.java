@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import androidx.annotation.Nullable;
 
 import com.pspdfkit.document.PdfDocument;
+import com.pspdfkit.utils.Size;
 
 public class PdfReactImageView extends ReactImageView {
     private int pageIndex = 0;
@@ -66,9 +67,11 @@ public class PdfReactImageView extends ReactImageView {
 
     private void startDownloading(PdfDocument doc, final Handler handler) {
         try {
+            int idx = getPageIndex()
+            Log.e("ReactImageViewManager", "it is time to render page to bitmap for " + idx);
+            Size pageSize = doc.getPageSize(idx);
 
-            Log.e("ReactImageViewManager", "it is time to render page to bitmap for " + getPageIndex());
-            doc.renderPageToBitmapAsync(getContext(), getPageIndex(), 100, 100)
+            doc.renderPageToBitmapAsync(getContext(), getPageIndex(), pageSize.width, pageSize.height)
                     .subscribe(bmp -> {
                         Log.e("ReactImageViewManager", "setImage with the bitmap we just retrieved!!!!");
                         setImage(bmp, handler);
