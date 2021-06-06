@@ -68,7 +68,7 @@ public class PdfReactImageView extends ReactImageView {
         try {
 
             Log.e("ReactImageViewManager", "it is time to render page to bitmap for " + getPageIndex());
-            doc.renderPageToBitmapAsync(getContext(), getPageIndex(), 50, 100)
+            doc.renderPageToBitmapAsync(getContext(), getPageIndex(), 100, 100)
                     .subscribe(bmp -> {
                         Log.e("ReactImageViewManager", "setImage with the bitmap we just retrieved!!!!");
                         setImage(bmp, handler);
