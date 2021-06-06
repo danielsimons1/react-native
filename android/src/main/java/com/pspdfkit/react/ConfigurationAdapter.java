@@ -87,7 +87,6 @@ public class ConfigurationAdapter {
     private static final String SHOW_SETTINGS_MENU = "showSettingsMenu";
     private static final String TOOLBAR_TITLE = "toolbarTitle";
     private static final String SHOW_DOCUMENT_EDITOR = "showDocumentEditor";
-    private static final String EXTRA_SHIT = "extraShit";
 
     private final PdfActivityConfiguration.Builder configuration;
 
