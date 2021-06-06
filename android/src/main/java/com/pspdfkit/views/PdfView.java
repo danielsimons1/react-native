@@ -66,6 +66,7 @@ import com.pspdfkit.ui.search.PdfSearchView;
 import com.pspdfkit.ui.search.PdfSearchViewInline;
 import com.pspdfkit.ui.special_mode.controller.AnnotationTool;
 import com.pspdfkit.ui.toolbar.grouping.MenuItemGroupingRule;
+import com.pspdfkit.ui.PSPDFKitViews;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -451,6 +452,8 @@ public class PdfView extends FrameLayout {
 
         // After attaching the PdfUiFragment we can access the PdfFragment.
         preparePdfFragment(pdfUiFragment.getPdfFragment());
+
+        pdfUiFragment.getPSPDFKitViews().showView(PSPDFKitViews.Type.VIEW_THUMBNAIL_GRID);
     }
 
     private void preparePdfFragment(@NonNull PdfFragment pdfFragment) {
