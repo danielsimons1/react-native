@@ -58,8 +58,7 @@ public class ReactDocumentImageViewManager extends SimpleViewManager<PdfReactIma
     public void setDocument(PdfReactImageView view, String documentPath) {
         Log.i("ReactDocumentImageViewManager", documentPath);
 
-        // PdfDocumentLoader.openDocumentAsync(mCallerContext, Uri.parse(documentPath))
-        PDFDocumentHelper.getInstance(mCallerContext).getDocument()
+        PDFDocumentHelper.getInstance(mCallerContext).getDocument(documentPath)
                 .subscribeOn(Schedulers.io())
                 .subscribe(pdfDoc -> {
                     Log.e("Found Document", "document was initialized");

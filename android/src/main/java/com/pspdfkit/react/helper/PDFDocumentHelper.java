@@ -40,9 +40,7 @@ public class PDFDocumentHelper {
 
         private static final String FILE_SCHEME = "file:///";
 
-        private String documentPath = "file:///android_asset/FullBook_V9.pdf";
-
-    // other instance variables can be here
+        // other instance variables can be here
         public PdfDocument document = null;
 
         private PDFDocumentHelper(ReactApplicationContext context) {
@@ -57,39 +55,16 @@ public class PDFDocumentHelper {
             return(INSTANCE);
         }
 
-    public static PDFDocumentHelper getInstance() {
+        public static PDFDocumentHelper getInstance() {
         return(INSTANCE);
     }
 
-    public void setDocument() {
-
-        if (Uri.parse(documentPath).getScheme() == null) {
-            // If there is no scheme it might be a raw path.
-            try {
-                File file = new File(documentPath);
-                documentPath = Uri.fromFile(file).toString();
-            } catch (Exception e) {
-                documentPath = FILE_SCHEME + document;
+        public Single<PdfDocument> getDocument(String documentPath) {
+            if (this.document != null) {
+                return Single.just(this.document);
             }
+
+            return PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(documentPath));
         }
-
-        PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(documentPath))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(pdfDocument -> {
-                    Log.e("Found Document", "document was initialized");
-                    this.document = pdfDocument;
-                }, throwable -> {
-                    Log.e("PDFDocumentHelper", "throwing: $throwable");
-                });
-    }
-
-    public Single<PdfDocument> getDocument() {
-        if (this.document != null) {
-            return Single.just(this.document);
-        }
-
-        return PdfDocumentLoader.openDocumentAsync(reactAppContext, Uri.parse(this.documentPath));
-    }
 
 }

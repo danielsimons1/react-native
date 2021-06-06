@@ -1,6 +1,6 @@
 {
   "name": "react-native-pspdfkit",
-  "version": "1.31.75",
+  "version": "1.31.76",
   "description": "A React Native module for the PSPDFKit library.",
   "keywords": [
     "react native",
