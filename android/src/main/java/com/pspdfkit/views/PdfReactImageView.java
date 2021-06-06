@@ -65,25 +65,40 @@ public class PdfReactImageView extends ReactImageView {
     }
 
     private void startDownloading(PdfDocument doc, final Handler handler) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
+        try {
 
-                    Log.e("ReactImageViewManager", "it is time to render page to bitmap for " + getPageIndex());
-                    doc.renderPageToBitmapAsync(getContext(), getPageIndex(), 50, 100)
-                            .subscribe(bmp -> {
-                                Log.e("ReactImageViewManager", "setImage with the bitmap we just retrieved!!!!");
-                                setImage(bmp, handler);
-                            }, error -> {
-                                //handle error
-                                Log.e("ReactImageManager", "Error : " + error.getMessage());
-                            });
+            Log.e("ReactImageViewManager", "it is time to render page to bitmap for " + getPageIndex());
+            doc.renderPageToBitmapAsync(getContext(), getPageIndex(), 50, 100)
+                    .subscribe(bmp -> {
+                        Log.e("ReactImageViewManager", "setImage with the bitmap we just retrieved!!!!");
+                        setImage(bmp, handler);
+                    }, error -> {
+                        //handle error
+                        Log.e("ReactImageManager", "Error : " + error.getMessage());
+                    });
 
-                } catch (Exception e) {
-                    Log.e("ReactImageManager", "Error : " + e.getMessage());
-                }
-            }
-        }).start();
+        } catch (Exception e) {
+            Log.e("ReactImageManager", "Error : " + e.getMessage());
+        }
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//
+//                    Log.e("ReactImageViewManager", "it is time to render page to bitmap for " + getPageIndex());
+//                    doc.renderPageToBitmapAsync(getContext(), getPageIndex(), 50, 100)
+//                            .subscribe(bmp -> {
+//                                Log.e("ReactImageViewManager", "setImage with the bitmap we just retrieved!!!!");
+//                                setImage(bmp, handler);
+//                            }, error -> {
+//                                //handle error
+//                                Log.e("ReactImageManager", "Error : " + error.getMessage());
+//                            });
+//
+//                } catch (Exception e) {
+//                    Log.e("ReactImageManager", "Error : " + e.getMessage());
+//                }
+//            }
+//        }).start();
     }
 }
