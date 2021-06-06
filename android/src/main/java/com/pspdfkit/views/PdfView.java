@@ -456,7 +456,7 @@ public class PdfView extends FrameLayout {
         if (this.configuration.isThumbnailGridEnabled()) {
             pdfUiFragment.getPSPDFKitViews().showView(PSPDFKitViews.Type.VIEW_THUMBNAIL_GRID);
         } else {
-            pdfUiFragment.getPSPDFKitViews().showView(PSPDFKitViews.Type.VIEW_READER);
+            pdfUiFragment.getPSPDFKitViews().showView(PSPDFKitViews.Type.VIEW_NONE);
         }
     }
 
