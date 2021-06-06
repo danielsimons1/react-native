@@ -67,7 +67,7 @@ public class PdfReactImageView extends ReactImageView {
 
     private void startDownloading(PdfDocument doc, final Handler handler) {
         try {
-            int idx = getPageIndex()
+            int idx = getPageIndex();
             Log.e("ReactImageViewManager", "it is time to render page to bitmap for " + idx);
             Size pageSize = doc.getPageSize(idx);
 
